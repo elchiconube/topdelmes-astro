@@ -1,0 +1,89 @@
+---
+import { postFormatDate } from '../utils.js';
+
+const { movie, director } = Astro.props;
+---
+
+<div class={'movie'}>
+  <figure>
+    <img
+      itemprop='image'
+      src={movie.poster}
+      width={300}
+      height={450}
+      alt={`Portada de ${movie.title}`}
+    />
+  </figure>
+  <div>
+    <h3 class={'title'}>{movie.title}</h3>
+    {director && <p>Director: {director}</p>}
+    <p>
+      <img
+        src={'/images/imdb-logo.png'}
+        width={30}
+        height={30}
+        alt='IMDB Logo'
+      />
+      {movie.imdb}/10
+    </p>
+    {
+      movie.metascore && (
+        <p>
+          <img
+            src={'/images/metascore-logo.png'}
+            width={30}
+            height={30}
+            alt='Metascore Logo'
+          />
+          {movie.metascore}/100
+        </p>
+      )
+    }
+
+    {movie.genre && <p>Género: {movie.genre}</p>}
+    {movie.pub_year && <p>Fecha: {movie.pub_year}</p>}
+    {movie.runtime && <p>Duración: {movie.runtime}</p>}
+    {movie.description && <p>Descripción 🇺🇸: {movie.description}</p>}
+    <p>Última actualización: {postFormatDate(movie.updatedAt)}</p>
+  </div>
+</div>
+
+<style>
+  .movie {
+    color: var(--gainsboro);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    color: var(--gainsboro);
+    font-size: var(--fs-4);
+  }
+
+  .movie p {
+    color: var(--gainsboro);
+    font-size: var(--fs-7);
+    display: flex;
+    align-items: center;
+    gap: var(--fs-6);
+    margin-bottom: var(--fs-12);
+  }
+
+  @media screen and (max-width: 768px) {
+    .movie {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    .movie figure {
+      text-align: center;
+    }
+
+    .movie figure img {
+      display: inline-block;
+    }
+  }
+</style>

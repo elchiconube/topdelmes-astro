@@ -1,0 +1,96 @@
+---
+import { getPreviousYears } from '../utils';
+
+const { series = [], peliculas = [] } = getPreviousYears();
+---
+
+<section class={'section'}>
+  <header>
+    <p class={'subtitle'}>
+      Descubre las mejores series y películas de años anteriores
+    </p>
+    <h2 class={'title'}>Mejores series y películas de años anteriores</h2>
+  </header>
+  <div class={'multiple_list'}>
+    <div>
+      <h3>Series mejor valoradas por año</h3>
+      <ul>
+        {
+          series.map(({ url, year }) => (
+            <li>
+              <a href={url}>Las mejores series estrenadas en de {year}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h3>Películas mejor valoradas por año</h3>
+      <ul>
+        {
+          peliculas.map(({ url, year }) => (
+            <li>
+              <a href={url}>Las mejores películas estrenadas en {year}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    background-color: var(--rich-black-fogra-29);
+    min-height: 30vh;
+    background-size: 35%;
+    padding: 50px 0;
+    border-top: 1px solid var(--gunmetal-2);
+  }
+
+  .title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: var(--fs-2);
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .multiple_list {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(calc(300px + 12vmin), 100%), 1fr)
+    );
+    gap: 32px;
+  }
+
+  .multiple_list h3 {
+    color: var(--gainsboro);
+    margin-bottom: 10px;
+  }
+
+  .multiple_list li a {
+    color: var(--white);
+    letter-spacing: 1px;
+    font-size: var(--fs-9);
+    transition: var(--transition-1);
+  }
+
+  .multiple_list li a:hover {
+    color: var(--citrine);
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ReviewList from '../../components/ReviewList.astro';
+import Pagination from '../../components/Pagination.astro';
+
+import { getReviews } from '../../data/api';
+
+const page = Astro.url.searchParams.get('page')! || '';
+
+const { reviews, pagination } = await getReviews(page);
+---
+
+<Layout
+  title={`Análisis de Series y Películas | TopDelMes`}
+  description={`Descubre análisis detallados e imparciales de tus películas y series favoritas en TopDelMes. Nuestros expertos te ofrecen opiniones y calificaciones para ayudarte a elegir qué ver.`}
+  canonical={`https://topdelmes.com/analisis`}
+>
+  <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
+    <h1 class={'title'}>Análisis de Películas y Series</h1>
+    <h2 class={'subtitle'}>
+      Opiniones y calificaciones de expertos para tus películas y series
+      favoritas
+    </h2>
+    <p class={'description'}>
+      En TopDelMes, analizamos las películas y series más populares y mejor
+      puntuadas para que puedas tomar decisiones informadas sobre qué ver.
+      Nuestros expertos te ofrecen opiniones detalladas e imparciales, así como
+      calificaciones basadas en diversos factores. Explora nuestra selección de
+      análisis y descubre tus próximos favoritos.
+    </p>
+    <ReviewList items={reviews} />
+  </div>
+  <Pagination pagination={pagination} />
+</Layout>

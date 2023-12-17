@@ -1,0 +1,39 @@
+---
+const { items, dataprop } = Astro.props;
+
+import Card from './Card.astro';
+
+const getDirector = (item) =>
+  item?.reviews?.data[0]?.attributes?.director || null;
+---
+
+<ul class={'container'} itemscope itemtype='http://schema.org/ItemList'>
+  {
+    items.map((item, position) => (
+      <li
+        itemprop='itemListElement'
+        itemscope
+        itemtype={`http://schema.org/${dataprop}`}
+      >
+        <meta itemprop='position' content={position + 1} />
+        {getDirector(item) && (
+          <meta itemprop='director' content={getDirector(item)} />
+        )}
+        <Card ranking={position + 1} item={item} />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .container {
+    padding: 0 32px;
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(calc(130px + 12vmin), 100%), 1fr)
+    );
+    margin: 0 0 50px 0;
+  }
+</style>

@@ -1,0 +1,26 @@
+{
+  "name": "topdelmes",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "node dist/server/entry.mjs",
+    "build": "astro build && npm run build:sitemap",
+    "build:sitemap": "node generate-sitemap.js",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^7.0.1",
+    "@fontsource/poppins": "^5.0.8",
+    "astro": "^4.0.6",
+    "astro-embed": "^0.6.1",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "marked": "^11.1.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "remove-markdown": "^0.5.0",
+    "sitemap": "^7.1.1"
+  }
+}

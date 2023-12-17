@@ -1,0 +1,9 @@
+---
+import { YouTube } from 'astro-embed';
+
+const { url } = Astro.props;
+
+const videoId = url.includes('v=') ? url.split('v=')[1] : url.split('/').pop();
+---
+
+<YouTube id={videoId} />

@@ -1,0 +1,122 @@
+---
+import { postFormatDate, limitDescription } from '../utils.js';
+
+const { items = [] } = Astro.props;
+---
+
+<ul class={'list'}>
+  {
+    items.map((review) => (
+      <li class={'item'} itemscope itemtype='http://schema.org/Article'>
+        <article class={'article'}>
+          <figure>
+            <a href={`/analisis/${review.attributes.slug}`} itemprop='url'>
+              <img
+                itemprop='image'
+                loading={'lazy'}
+                alt={review.attributes.title}
+                src={review.attributes?.image || '/images/popcorn.webp'}
+                sizes='100vw'
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </a>
+          </figure>
+          <div class={'container'}>
+            <h2 itemprop='headline'>
+              <a href={`/analisis/${review.attributes.slug}`}>
+                Análisis {review.attributes.title}
+              </a>
+            </h2>
+            <time
+              datetime={review.attributes.publishedAt}
+              itemprop='datePublished'
+            >
+              {postFormatDate(review.attributes.publishedAt)}
+            </time>
+            <p itemprop='description'>
+              {limitDescription(review.attributes.description)}
+            </p>
+            <div
+              itemprop='author'
+              itemscope
+              itemtype='http://schema.org/Person'
+            >
+              <meta
+                itemprop='url'
+                content={`https://topdelmes.com/autores/${review.attributes.author?.data.attributes.slug}`}
+              />
+
+              <meta
+                itemprop='name'
+                content={review.attributes.author?.data.attributes.fullname}
+              />
+            </div>
+          </div>
+        </article>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .list {
+    padding: 32px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(calc(200px + 12vmin), 100%), 1fr)
+    );
+    margin: 0 0 50px 0;
+  }
+
+  .list > li {
+    color: var(--gainsboro);
+    background: var(--gunmetal-1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .article figure {
+    position: relative;
+    background-color: var(--gunmetal-1);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    transition: var(--transition-1);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 235px;
+    width: 100%;
+  }
+
+  .article img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0px;
+    object-fit: cover;
+    color: transparent;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .article h2 a {
+    color: var(--white);
+    font-size: var(--fs-5);
+    transition: var(--transition-1);
+  }
+
+  .article h2 a:hover {
+    color: var(--citrine);
+  }
+
+  .article time {
+    margin: 8px 0;
+    display: block;
+  }
+</style>

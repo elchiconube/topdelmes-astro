@@ -1,0 +1,22 @@
+---
+const { title, slug, image } = Astro.props;
+---
+
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:site' content='@topdelmes_' />
+<meta name='twitter:title' content={`Análisis de ${title} | TopDelMes`} />
+<meta
+  name='twitter:description'
+  content={`Descubre el análisis de ${title}. Lee nuestra crítica detallada y entérate de por qué no te puedes perder.`}
+/>
+<meta name='twitter:image' content={image} />
+
+<meta property='og:title' content={`Análisis de ${title} | TopDelMes`} />
+<meta
+  property='og:description'
+  content={`Descubre el análisis de ${title}. Lee nuestra crítica detallada y entérate de por qué no te puedes perder.`}
+/>
+<meta property='og:image' content={image} />
+<meta property='og:type' content='article' />
+<meta property='og:url' content={`https://topdelmes.com/analisis/${slug}`} />
+<meta property='og:site_name' content='TopDelMes' />

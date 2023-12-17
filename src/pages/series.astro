@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+import List from '../components/List.astro';
+import Previous from '../components/Previous.astro';
+import PreviousYears from '../components/PreviousYears.astro';
+
+import { getCurrentYear, getToday } from '../utils';
+import { getSeries } from '../data/api';
+
+const year = getCurrentYear();
+const today = getToday();
+
+const { series } = await getSeries();
+---
+
+<Layout
+  title={`Top 50 de peliculas ${year} | TopDelMes`}
+  description={`Explora las mejores series de ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus series favoritas y descubre nuevas!`}
+  canonical={Astro.url}
+>
+  <Breadcrumb
+    maxWidth={'100%'}
+    links={[
+      {
+        href: 'https://topdelmes.com/',
+        name: 'Inicio',
+      },
+      {
+        href: `https://topdelmes.com/mejores/series`,
+        name: `Mejores series de ${year}`,
+      },
+    ]}
+  />
+
+  <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
+    <h1 class={'title'}>Top 50 de series {year}</h1>
+    <h2 class={'subtitle'}>
+      Las series más populares y mejor puntuadas del mes de {year}{' '}
+       (actualizado {today})
+    </h2>
+    <p class={'description'}>
+      En TopDelMes, tenemos una lista actualizada con las series más populares y
+      emocionantes de {year}. Nuestra lista de las mejores series del mes {year}
+       se actualiza diariamente para asegurarnos de que siempre estés informado
+      sobre las novedades y las series que no te puedes perder.
+    </p>
+    <List items={series} dataprop='TVSeries' />
+  </div>
+  <Previous type={'tv_series'} />
+  <PreviousYears />
+</Layout>
+
+<style>
+  .title {
+    text-align: center;
+    font-size: var(--fs-2);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .section {
+    padding: 32px 0 0 0;
+  }
+
+  .description {
+    padding: 0 32px;
+    font-size: var(--fs-13);
+    font-weight: var(--fw-500);
+    color: var(--white);
+    max-width: 900px;
+    margin: 0 auto 25px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+
+  .footer a {
+    color: var(--white);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-700);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 30px;
+    border: 2px solid var(--citrine);
+    border-radius: 50px;
+    transition: var(--transition-1);
+  }
+
+  .footer a:hover {
+    background: var(--citrine);
+    color: var(--xiketic);
+  }
+</style>

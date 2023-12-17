@@ -1,0 +1,124 @@
+---
+import { getRandomYearMonth } from '../utils';
+
+const { year, month } = getRandomYearMonth();
+---
+
+<section class={'section'}>
+  <img
+    alt='Pattern'
+    src={'/images/pattern.png'}
+    style={{
+      objectFit: 'cover',
+    }}
+  />
+  <header>
+    <span class={'subtitle'}> Descubre películas y series al azar</span>
+    <h2 class={'title'}>¡Sorpresa viaja en nuestra máquina del tiempo!</h2>
+  </header>
+  <div>
+    <p>
+      ¿Buscas algo nuevo y emocionante para ver, pero no sabes por dónde
+      empezar? ¡Tenemos la solución perfecta para ti! Haz clic en el cualquiera
+      de los botones a continuación y te llevaremos a una selección aleatoria de
+      películas o series de un año y mes al azar. ¡Explora el maravilloso mundo
+      del cine y la televisión y descubre tesoros ocultos que quizás te hayas
+      perdido! No esperes más, ¡la aventura cinematográfica te espera!
+    </p>
+  </div>
+  <footer class={'actions'}>
+    <a class={'cta'} href={`/mejores/series/${year}/${month}`}>
+      Soy más de series
+    </a>
+    <a class={'cta'} href={`/mejores/peliculas/${year}/${month}`}>
+      Hoy me apetece películas
+    </a>
+  </footer>
+</section>
+
+<style>
+  .section {
+    background-color: var(--raisin-black);
+    min-height: 30vh;
+    background-size: 35%;
+    padding: 50px 0;
+    position: relative;
+  }
+
+  .section > img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0px;
+    object-fit: cover;
+    color: transparent;
+  }
+
+  .section > header {
+    position: relative;
+  }
+
+  .section > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  .section > div > p {
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 21px;
+    text-align: center;
+  }
+
+  .title {
+    margin-bottom: 21px;
+    text-align: center;
+    font-size: var(--fs-2);
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+  }
+
+  .cta {
+    max-width: 360px;
+    white-space: nowrap;
+
+    color: var(--white);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-700);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    gap: 10px;
+    padding: 16px 30px;
+    border: 2px solid var(--citrine);
+    border-radius: 50px;
+    transition: var(--transition-1);
+    white-space: nowrap;
+  }
+
+  .cta:hover {
+    background: var(--citrine);
+    color: var(--xiketic);
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+import { getAuthors } from '../../data/api';
+
+const { authors = [] } = await getAuthors();
+---
+
+<Layout
+  title={`Autores | TopDelMes`}
+  description={`Aquí podrás ver nuestro equipo al completo`}
+  canonical={`https://topdelmes.com/autores`}
+>
+  <Breadcrumb
+    maxWidth={900}
+    links={[
+      {
+        href: 'https://topdelmes.com/',
+        name: 'Inicio',
+      },
+      {
+        href: 'https://topdelmes.com/autores',
+        name: 'Autores',
+      },
+    ]}
+  />
+
+  <div class={'section'}>
+    <h2 class={'subtitle'}>Nuestros expertos</h2>
+    <h1 class={'title'}>Autores</h1>
+    <p class={'description'}>Aquí podrás ver nuestro equipo al completo</p>
+
+    <div class={'authors'}>
+      {
+        authors.map((author) => (
+          <address class={'author'}>
+            <a href={`/autores/${author.attributes.slug}`}>
+              <img
+                src={author.attributes.avatar}
+                width={120}
+                height={120}
+                alt={author.attributes.fullname}
+              />
+              <h3>{author.attributes.fullname}</h3>
+            </a>
+            <p>Periodista. Especialidad en crítica de cine y series</p>
+          </address>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .section {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+    color: var(--gainsboro);
+    font-size: var(--fs-7);
+    padding: 32px;
+    position: relative;
+  }
+  .title {
+    text-align: center;
+    font-size: var(--fs-1);
+    color: var(--gainsboro);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .authors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 0 auto;
+    max-width: 900px;
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .author {
+    text-align: center;
+  }
+
+  .author a {
+    color: var(--gainsboro);
+  }
+
+  .author a:hover {
+    color: var(--citrine);
+  }
+
+  .author img {
+    border-radius: 50%;
+    display: inline-block;
+  }
+</style>

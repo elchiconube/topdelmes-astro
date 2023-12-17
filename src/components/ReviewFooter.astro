@@ -1,0 +1,41 @@
+---
+import removeMd from 'remove-markdown';
+
+import MovieCard from './MovieCard.astro';
+
+const { relatedContent, director, articleAuthor, rate, body } = Astro.props;
+
+const content = removeMd(body);
+---
+
+<footer itemscope itemtype='http://schema.org/Movie'>
+  <MovieCard movie={relatedContent} director={director} />
+  <meta itemprop='name' content={relatedContent.title} />
+  <meta itemprop='director' content={director} />
+  <meta itemprop='description' content={relatedContent.description} />
+  <meta itemprop='dateCreated' content={relatedContent.createdAt} />
+  <div itemprop='offers' itemscope itemtype='http://schema.org/Offer'>
+    <meta itemprop='price' content='0.00' />
+    <meta itemprop='priceCurrency' content='$' />
+    <div itemprop='seller' itemscope itemtype='http://schema.org/Person'>
+      <meta itemprop='name' content={articleAuthor.fullname} />
+    </div>
+  </div>
+  <div itemprop='review' itemscope itemtype='http://schema.org/Review'>
+    <div itemprop='author' itemscope itemtype='http://schema.org/Person'>
+      <meta
+        itemprop='url'
+        content={`https://topdelmes.com/autores/${articleAuthor.slug}`}
+      />
+
+      <meta itemprop='name' content={articleAuthor.fullname} />
+    </div>
+    <div itemprop='reviewRating' itemscope itemtype='http://schema.org/Rating'>
+      <meta itemprop='bestRating' content='10' />
+      <meta itemprop='worstRating' content='0' />
+      <meta itemprop='ratingValue' content={rate || 6} />
+    </div>
+    <meta itemprop='name' content={relatedContent.title} />
+    <meta itemprop='reviewBody' content={content} />
+  </div>
+</footer>

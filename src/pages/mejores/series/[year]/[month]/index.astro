@@ -1,0 +1,155 @@
+---
+import Layout from '../../../../../layouts/Layout.astro';
+import Breadcrumb from '../../../../../components/Breadcrumb.astro';
+import List from '../../../../../components/List.astro';
+import {
+  getPrevNextYearMonth,
+  isCurrentMonthAndYear,
+  validateYearAndMonth,
+} from '../../../../../utils';
+import { getTopByMonth } from '../../../../../data/api';
+
+const { year, month } = Astro.params;
+
+const { next, prev } = getPrevNextYearMonth(year, month, 'tv_series');
+
+if (isCurrentMonthAndYear(year, month)) {
+  Astro.redirect('/series');
+}
+
+if (!validateYearAndMonth(year, month, 'tv_series')) {
+  Astro.redirect('/no-hay-datos');
+}
+
+const { data } = await getTopByMonth(year);
+---
+
+<Layout
+  title={`Top ${month} ${year}: Mejores Series Actualizadas | TopDelMes`}
+  description={`Explora las mejores series de ${month} ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus series favoritas y descubre nuevas!`}
+  canonical={`https://topdelmes.com/mejores/series/${year}/${month}`}
+>
+  <Breadcrumb
+    maxWidth={'100%'}
+    links={[
+      {
+        href: 'https://topdelmes.com/',
+        name: 'Inicio',
+      },
+      {
+        href: `https://topdelmes.com/mejores/series/${year}/${month}`,
+        name: `Mejores series de ${month} ${year}`,
+      },
+    ]}
+  />
+  <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
+    <h1 class={'title'}>
+      Las mejores series de {month}
+      {year}: Top 50 del mes
+    </h1>
+    <h2 class={'subtitle'}>
+      Las series mejor puntuadas durante el mes de {month} de {year}
+    </h2>
+    <p class={'description'}>
+      Descubre las 50 series más populares y mejor valoradas del mes de{' '}
+      {month}
+      {year} en nuestra selección mensual. Este ranking te ayudará a mantenerte
+      informado sobre las últimas tendencias y los estrenos más destacados en el
+      mundo de las series de televisión. No te pierdas ninguna novedad y
+      disfruta de las mejores series del momento.
+    </p>
+    <p class={'description'}>
+      En nuestra lista de las mejores series de {month}
+      {year}, encontrarás una amplia variedad de géneros y temáticas, desde
+      dramas intensos hasta comedias ligeras, pasando por intrigantes series de
+      ciencia ficción y apasionantes thrillers. Nuestro ranking se basa en las
+      valoraciones y opiniones de los espectadores, lo que garantiza que solo
+      encontrarás las series más populares y de mayor calidad.
+    </p>
+    <p class={'description'}>
+      Si estás buscando nuevas series para ver o quieres saber cuáles son las
+      más destacadas del mes, nuestra lista de las mejores series de{' '}
+      {month}
+      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre
+      las series que están dando de qué hablar. ¡No esperes más y comienza a
+      disfrutar de las mejores series del mes!
+    </p>
+    <List items={data} dataprop='TVSeries' />
+    <footer class={'footer'}>
+      {
+        prev && (
+          <a href={`/mejores/series/${prev.year}/${prev.month}`}>
+            Ver series de {prev.month} {prev.year}
+          </a>
+        )
+      }
+      {
+        next && (
+          <a href={`/mejores/series/${next.year}/${next.month}`}>
+            Ver series de {next.month} {next.year}
+          </a>
+        )
+      }
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .title {
+    text-align: center;
+    font-size: var(--fs-2);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .section {
+    padding: 32px 0 0 0;
+  }
+
+  .description {
+    padding: 0 32px;
+    font-size: var(--fs-13);
+    font-weight: var(--fw-500);
+    color: var(--white);
+    max-width: 900px;
+    margin: 0 auto 25px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+
+  .footer a {
+    color: var(--white);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-700);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 30px;
+    border: 2px solid var(--citrine);
+    border-radius: 50px;
+    transition: var(--transition-1);
+  }
+
+  .footer a:hover {
+    background: var(--citrine);
+    color: var(--xiketic);
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import { getToday, getFullYear } from '../utils';
+
+const today = getToday();
+const year = getFullYear();
+---
+
+<header class={'header'}>
+  <img alt='Patrón de fondo' src={'/images/pattern.png'} />
+  <div>
+    <h1 class={'heading'}>TopDelMes</h1>
+    <h2 class={'subtitle'}>Actualizado {today}</h2>
+    <p>
+      Bienvenido a TopDelMes, tu web de información sobre las mejores películas
+      y mejores series de {year}. En nuestra web encontrarás los top de series y
+      películas por mes y por año. Descubre cuáles son las películas y series
+      más populares del {year} y cuáles son las mejor valoradas por los
+      usuarios.
+    </p>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--raisin-black);
+    min-height: 30vh;
+    background-size: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .header > div {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--gainsboro);
+    font-size: var(--fs-7);
+    padding: 32px;
+    position: relative;
+  }
+  img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0px;
+    object-fit: cover;
+    color: transparent;
+  }
+</style>
