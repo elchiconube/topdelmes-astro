@@ -10,7 +10,7 @@ const { year } = Astro.params;
 const { next, prev } = getAdjacentYears(year, 'tv_series');
 
 if (!isValidYear(year, 'tv_series')) {
-  Astro.redirect('/no-hay-datos');
+  Astro.redirect('/404');
 }
 
 const { data } = await getTopByYear('tv_series', year);

@@ -18,7 +18,7 @@ if (isCurrentMonthAndYear(year, month)) {
 }
 
 if (!validateYearAndMonth(year, month, 'tv_series')) {
-  Astro.redirect('/no-hay-datos');
+  Astro.redirect('/404');
 }
 
 const { data } = await getTopByMonth(year);
