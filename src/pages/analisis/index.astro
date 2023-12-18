@@ -15,20 +15,58 @@ const { reviews, pagination } = await getReviews(page);
   description={`Descubre análisis detallados e imparciales de tus películas y series favoritas en TopDelMes. Nuestros expertos te ofrecen opiniones y calificaciones para ayudarte a elegir qué ver.`}
   canonical={`https://topdelmes.com/analisis`}
 >
-  <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
-    <h1 class={'title'}>Análisis de Películas y Series</h1>
-    <h2 class={'subtitle'}>
-      Opiniones y calificaciones de expertos para tus películas y series
-      favoritas
-    </h2>
-    <p class={'description'}>
-      En TopDelMes, analizamos las películas y series más populares y mejor
-      puntuadas para que puedas tomar decisiones informadas sobre qué ver.
-      Nuestros expertos te ofrecen opiniones detalladas e imparciales, así como
-      calificaciones basadas en diversos factores. Explora nuestra selección de
-      análisis y descubre tus próximos favoritos.
-    </p>
+  <div itemscope itemtype='http://schema.org/ItemList'>
+    <header>
+      <h1 class={'title'}>Análisis de Películas y Series</h1>
+      <h2 class={'subtitle'}>
+        Opiniones y calificaciones de expertos para tus películas y series
+        favoritas
+      </h2>
+      <p class={'description'}>
+        En TopDelMes, analizamos las películas y series más populares y mejor
+        puntuadas para que puedas tomar decisiones informadas sobre qué ver.
+        Nuestros expertos te ofrecen opiniones detalladas e imparciales, así
+        como calificaciones basadas en diversos factores. Explora nuestra
+        selección de análisis y descubre tus próximos favoritos.
+      </p>
+    </header>
+
     <ReviewList items={reviews} />
+    <Pagination pagination={pagination} />
   </div>
-  <Pagination pagination={pagination} />
 </Layout>
+<style>
+  div {
+    padding: 32px;
+  }
+
+  header {
+    text-align: center;
+  }
+
+  .title {
+    text-align: center;
+    font-size: var(--fs-2);
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    color: var(--citrine);
+    font-size: var(--fs-11);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .description {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+    color: var(--gainsboro);
+    font-size: var(--fs-7);
+    padding: 32px;
+    position: relative;
+  }
+</style>

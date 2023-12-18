@@ -95,6 +95,10 @@ a{
    text-align: center;
 }
 
+.container{
+   margin: 0 auto;
+}
+
  
 
 @media (min-width: 768px) {
