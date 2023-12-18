@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import node from "@astrojs/node";
-import { getCurrentMonthName } from '../src/utils';
+import { getCurrentMonthName } from './src/utils'
 
 
 const month = getCurrentMonthName();
