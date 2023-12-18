@@ -186,7 +186,7 @@ const generateUrls = (prefix, actualMonth, actualYear, months) => {
     const index = (actualMonth - i + 12) % 12;
     const year = actualMonth - i < 0 ? actualYear - 1 : actualYear;
     return {
-      url: `/${prefix}/${year}/${months[index]}`,
+      url: `/mejores/${prefix}/${year}/${months[index]}`,
       month: months[index],
       year: year,
     };

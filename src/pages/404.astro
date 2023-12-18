@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title={`¡Oops! Página no encontrada - 404 Error | TopDelMes`}
+  description={`Lo sentimos, pero la página que buscas no existe o ha sido eliminada. ¡Explora nuestro sitio para encontrar el contenido que necesitas!`}
+>
+  <section class={'error'}>
+    <h1 class={'heading'}>Vaya creo que te has equivocado</h1>
+    <p>Lo siento pero no tenemos datos o la fecha no es correcta</p>
+    <p>
+      Para obtener series puedes probar a partir 1990 y para películas a partir
+      de 1920. Por ejemplo
+    </p>
+    <ul>
+      <li>
+        <a href='/mejores/series/1990/enero'>
+          Top 10 de series en enero de 1990
+        </a>
+      </li>
+      <li>
+        <a href='/mejores/peliculas/1925/enero'>
+          Top 10 de peliculas en abril de 1925
+        </a>
+      </li>
+    </ul>
+    <p>
+      Prueba a cambiar el año y el mes o vuelve al{' '}
+      <a href={'/'}>Inicio</a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .error {
+    padding: 40px;
+    color: var(--gainsboro);
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .error h1 {
+    margin-bottom: 21px;
+  }
+
+  .error p,
+  .error ul {
+    margin-bottom: 12px;
+  }
+
+  .error a {
+    color: var(--gainsboro);
+    text-decoration: underline;
+    font-size: var(--fs-7);
+    transition: var(--transition-1);
+  }
+
+  .error a:hover {
+    color: var(--citrine);
+    text-decoration: underline;
+    font-size: var(--fs-7);
+  }
+</style>

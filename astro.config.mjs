@@ -8,6 +8,7 @@ const year = new Date().getFullYear();
 
 export default defineConfig({
   redirects: {
+    '/mejores/series': `/mejores/series/${year}/${month}`,
     '/mejores/peliculas': `/mejores/peliculas/${year}/${month}`,
   },
   output: "server",
