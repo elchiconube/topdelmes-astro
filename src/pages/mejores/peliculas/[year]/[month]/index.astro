@@ -11,23 +11,23 @@ import { getTopByMonth } from '../../../../../data/api';
 
 const { year, month } = Astro.params;
 
-const { next, prev } = getPrevNextYearMonth(year, month, 'tv_series');
+const { next, prev } = getPrevNextYearMonth(year, month, 'movie');
 
 if (isCurrentMonthAndYear(year, month)) {
-  Astro.redirect('/series');
+  Astro.redirect('/peliculas');
 }
 
-if (!validateYearAndMonth(year, month, 'tv_series')) {
+if (!validateYearAndMonth(year, month, 'movie')) {
   Astro.redirect('/404');
 }
 
-const { data } = await getTopByMonth('tv_series', year, month);
+const { data } = await getTopByMonth('movie', year, month);
 ---
 
 <Layout
-  title={`Top ${month} ${year}: Mejores Series Actualizadas | TopDelMes`}
-  description={`Explora las mejores series de ${month} ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus series favoritas y descubre nuevas!`}
-  canonical={`https://topdelmes.com/mejores/series/${year}/${month}`}
+  title={`Top ${month} ${year}: Mejores Películas Actualizadas | TopDelMes`}
+  description={`Explora las mejores películas de ${month} ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus películas favoritas y descubre nuevas!`}
+  canonical={`https://topdelmes.com/mejores/peliculas/${year}/${month}`}
 >
   <Breadcrumb
     maxWidth={'100%'}
@@ -37,56 +37,56 @@ const { data } = await getTopByMonth('tv_series', year, month);
         name: 'Inicio',
       },
       {
-        href: `https://topdelmes.com/mejores/series/${year}/${month}`,
-        name: `Mejores series de ${month} ${year}`,
+        href: `https://topdelmes.com/mejores/peliculas/${year}/${month}`,
+        name: `Mejores películas de ${month} ${year}`,
       },
     ]}
   />
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>
-      Las mejores series de {month}
+      Las mejores películas de {month}
       {year}: Top 50 del mes
     </h1>
     <h2 class={'subtitle'}>
-      Las series mejor puntuadas durante el mes de {month} de {year}
+      Las películas mejor puntuadas durante el mes de {month} de {year}
     </h2>
     <p class={'description'}>
-      Descubre las 50 series más populares y mejor valoradas del mes de{' '}
+      Descubre las 50 películas más populares y mejor valoradas del mes de{' '}
       {month}
       {year} en nuestra selección mensual. Este ranking te ayudará a mantenerte
       informado sobre las últimas tendencias y los estrenos más destacados en el
-      mundo de las series de televisión. No te pierdas ninguna novedad y
-      disfruta de las mejores series del momento.
+      mundo de las películas de televisión. No te pierdas ninguna novedad y
+      disfruta de las mejores películas del momento.
     </p>
     <p class={'description'}>
-      En nuestra lista de las mejores series de {month}
+      En nuestra lista de las mejores películas de {month}
       {year}, encontrarás una amplia variedad de géneros y temáticas, desde
-      dramas intensos hasta comedias ligeras, pasando por intrigantes series de
-      ciencia ficción y apasionantes thrillers. Nuestro ranking se basa en las
-      valoraciones y opiniones de los espectadores, lo que garantiza que solo
-      encontrarás las series más populares y de mayor calidad.
+      dramas intensos hasta comedias ligeras, pasando por intrigantes películas
+      de ciencia ficción y apasionantes thrillers. Nuestro ranking se basa en
+      las valoraciones y opiniones de los espectadores, lo que garantiza que
+      solo encontrarás las películas más populares y de mayor calidad.
     </p>
     <p class={'description'}>
-      Si estás buscando nuevas series para ver o quieres saber cuáles son las
-      más destacadas del mes, nuestra lista de las mejores series de{' '}
+      Si estás buscando nuevas películas para ver o quieres saber cuáles son las
+      más destacadas del mes, nuestra lista de las mejores películas de{' '}
       {month}
       {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre
-      las series que están dando de qué hablar. ¡No esperes más y comienza a
-      disfrutar de las mejores series del mes!
+      las películas que están dando de qué hablar. ¡No esperes más y comienza a
+      disfrutar de las mejores películas del mes!
     </p>
-    <List items={data} dataprop='TVSeries' />
+    <List items={data} dataprop='Movie' />
     <footer class={'footer'}>
       {
         prev && (
-          <a href={`/mejores/series/${prev.year}/${prev.month}`}>
-            Ver series de {prev.month} {prev.year}
+          <a href={`/mejores/peliculas/${prev.year}/${prev.month}`}>
+            Ver películas de {prev.month} {prev.year}
           </a>
         )
       }
       {
         next && (
-          <a href={`/mejores/series/${next.year}/${next.month}`}>
-            Ver series de {next.month} {next.year}
+          <a href={`/mejores/peliculas/${next.year}/${next.month}`}>
+            Ver películas de {next.month} {next.year}
           </a>
         )
       }
