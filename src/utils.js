@@ -174,10 +174,6 @@ export const getMonthNumber = (month) => {
   const lowercaseMonth = month.toLowerCase();
   const monthNumber = months[lowercaseMonth];
 
-  if (monthNumber === undefined) {
-    throw new Error(`Mes desconocido: ${month}`);
-  }
-
   return monthNumber;
 };
 

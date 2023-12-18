@@ -14,11 +14,11 @@ const { year, month } = Astro.params;
 const { next, prev } = getPrevNextYearMonth(year, month, 'movie');
 
 if (isCurrentMonthAndYear(year, month)) {
-  Astro.redirect('/peliculas');
+  return Astro.redirect('/peliculas');
 }
 
 if (!validateYearAndMonth(year, month, 'movie')) {
-  Astro.redirect('/404');
+  return Astro.redirect('/404');
 }
 
 const { data } = await getTopByMonth('movie', year, month);

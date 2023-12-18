@@ -14,11 +14,11 @@ const { year, month } = Astro.params;
 const { next, prev } = getPrevNextYearMonth(year, month, 'tv_series');
 
 if (isCurrentMonthAndYear(year, month)) {
-  Astro.redirect('/series');
+  return Astro.redirect('/series');
 }
 
 if (!validateYearAndMonth(year, month, 'tv_series')) {
-  Astro.redirect('/404');
+  return Astro.redirect('/404');
 }
 
 const { data } = await getTopByMonth('tv_series', year, month);
