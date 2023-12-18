@@ -44,7 +44,8 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
   <SocialHead title={title} slug={slug} image={image} slot='social' />
 
   <Breadcrumb
-    as={[
+    maxWidth={'100%'}
+    links={[
       {
         href: 'https://topdelmes.com/',
         name: 'Inicio',
