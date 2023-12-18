@@ -1,23 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
-import List from '../components/List.astro';
-import Previous from '../components/Previous.astro';
-import PreviousYears from '../components/PreviousYears.astro';
+import List from '../../components/List.astro';
+import Previous from '../../components/Previous.astro';
+import PreviousYears from '../../components/PreviousYears.astro';
 
-import { getCurrentYear, getToday } from '../utils';
-import { getSeries } from '../data/api';
+import { getCurrentYear, getToday } from '../../utils';
+import { getMovies } from '../../data/api';
 
 const year = getCurrentYear();
 const today = getToday();
 
-const { series } = await getSeries();
+const { movies = [] } = await getMovies();
 ---
 
 <Layout
-  title={`Top 50 de peliculas ${year} | TopDelMes`}
-  description={`Explora las mejores series de ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus series favoritas y descubre nuevas!`}
+  title={`Mejores películas de ${year}: Listado Completo y Actualizado | TopDelMes`}
+  description={`Echa un vistazo a las mejores películas de ${year} en nuestra selección completa y actualizada en TopDelMes.com. ¡No te pierdas los últimos estrenos!`}
   canonical={Astro.url}
 >
   <Breadcrumb
@@ -28,27 +28,28 @@ const { series } = await getSeries();
         name: 'Inicio',
       },
       {
-        href: `https://topdelmes.com/mejores/series`,
-        name: `Mejores series de ${year}`,
+        href: `https://topdelmes.com/mejores/peliculas`,
+        name: `Mejores peliculas de ${year}`,
       },
     ]}
   />
 
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
-    <h1 class={'title'}>Top 50 de series {year}</h1>
+    <h1 class={'title'}>Top 50 de peliculas {year}</h1>
     <h2 class={'subtitle'}>
-      Las series más populares y mejor puntuadas del mes de {year}{' '}
+      Las peliculas más populares y mejor puntuadas del mes de {year}{' '}
        (actualizado {today})
     </h2>
     <p class={'description'}>
-      En TopDelMes, tenemos una lista actualizada con las series más populares y
-      emocionantes de {year}. Nuestra lista de las mejores series del mes {year}
+      En TopDelMes, tenemos una lista actualizada con las peliculas más
+      populares y emocionantes de {year}. Nuestra lista de las mejores peliculas
+      del mes {year}
        se actualiza diariamente para asegurarnos de que siempre estés informado
-      sobre las novedades y las series que no te puedes perder.
+      sobre las novedades y las peliculas que no te puedes perder.
     </p>
-    <List items={series} dataprop='TVSeries' />
+    <List items={movies} dataprop='Movie' />
   </div>
-  <Previous type={'tv_series'} />
+  <Previous type={'movie'} />
   <PreviousYears />
 </Layout>
 

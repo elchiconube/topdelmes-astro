@@ -1,0 +1,12 @@
+---
+import { validateYearAndMonth } from '../../../../utils';
+
+const { year, month } = Astro.params;
+
+if (!validateYearAndMonth(year, month, 'movie')) {
+  return Astro.redirect('/404');
+}
+return Astro.redirect(`/mejores/peliculas/${year}/${month}`);
+---
+
+<p>holi</p>

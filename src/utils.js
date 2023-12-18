@@ -73,8 +73,8 @@ export const getToday = (date) => {
 export const getPrevNextYearMonth = (yearStr, monthStr, type) => {
   const year = parseInt(yearStr, 10);
   const month = getMonthNumber(monthStr);
-  const isMovies = type === "movies";
-  const isSeries = type === "series";
+  const isMovies = type === "movie";
+  const isSeries = type === "tv_series";
   const prevYear = month === 1 && isMovies ? year - 1 : year;
   const nextYear = month === 12 && isSeries ? year + 1 : year;
   const prevMonth = month === 1 ? 12 : month - 1;
@@ -146,7 +146,7 @@ export const formatVotes = (num) => {
 };
 
 export const isValidYear = (year, type) => {
-  const firstYear = type === "movies" ? 1920 : 1990;
+  const firstYear = type === "movie" ? 1920 : 1990;
   const currentYear = new Date().getFullYear();
   const parsedYear = parseInt(year);
   return parsedYear >= firstYear && parsedYear <= currentYear;
