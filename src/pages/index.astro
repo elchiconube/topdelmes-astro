@@ -6,6 +6,7 @@ import ReviewList from '../components/ReviewList.astro';
 import PreviousYears from '../components/PreviousYears.astro';
 import Previous from '../components/Previous.astro';
 import TimeMachine from '../components/TimeMachine.astro';
+import Newsletter from '../components/Newsletter.astro';
 
 import { getFullYear, getCurrentMonthName } from '../utils';
 
@@ -21,6 +22,7 @@ const { seriesYear, moviesYear, reviews, seriesMonth, moviesMonth } = data;
 
 <Layout>
   <Hero />
+  <Newsletter />
 
   <section class={'section'}>
     <header>
@@ -29,10 +31,10 @@ const { seriesYear, moviesYear, reviews, seriesMonth, moviesMonth } = data;
     </header>
     <div class={'description'}>
       <p>
-        Nuestra lista de las mejores series del {year} se actualiza diariamente
-        para que siempre estés al día de las últimos lanzamientos. Esperabas que
-        apareciera una serie en nuestro top y no la ves? No te preocupes,
-        averigua en qué posición está en nuestro{' '}
+        Nuestra lista de las mejores series del {year} se actualiza diariamente para
+        que siempre estés al día de las últimos lanzamientos. Esperabas que apareciera
+        una serie en nuestro top y no la ves? No te preocupes, averigua en qué posición
+        está en nuestro{' '}
         <a href={`/series`}>ranking de series completo</a>
       </p>
     </div>
@@ -93,9 +95,10 @@ const { seriesYear, moviesYear, reviews, seriesMonth, moviesMonth } = data;
       <p>
         Aquí tienes un listado con las 10 mejores series estrenadas en{' '}
         {month}
-        {year} actualizado diariamente. Esperabas que apareciera una serie en
-        nuestro top y no la ves? No te preocupes, averigua en qué posición está
-        en nuestro{' '}
+        {year} actualizado diariamente. Esperabas que apareciera una serie en nuestro
+        top y no la ves? No te preocupes, averigua en qué posición está en nuestro{
+          ' '
+        }
         <a href={`/mejores/series/${year}/${month}`}>
           ranking completo de {month}
           {year}
