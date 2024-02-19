@@ -6,6 +6,7 @@ import { getAuthor } from '../../data/api';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import ReviewList from '../../components/ReviewList.astro';
+import Newsletter from '../../components/Newsletter.astro';
 
 const { slug } = Astro.params;
 const { author } = await getAuthor(slug);
@@ -29,6 +30,8 @@ const body = marked.parse(author.attributes.bio);
       },
     ]}
   />
+  <Newsletter />
+
   <div
     class={'section'}
     itemprop='author'
@@ -53,6 +56,7 @@ const body = marked.parse(author.attributes.bio);
     </article>
   </div>
   <ReviewList items={author.attributes.reviews.data} />
+  <Newsletter />
 </Layout>
 
 <style>

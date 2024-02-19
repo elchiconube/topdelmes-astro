@@ -2,6 +2,7 @@
 import Layout from '../../../../../layouts/Layout.astro';
 import Breadcrumb from '../../../../../components/Breadcrumb.astro';
 import List from '../../../../../components/List.astro';
+import Newsletter from '../../../../../components/Newsletter.astro';
 import {
   getPrevNextYearMonth,
   isCurrentMonthAndYear,
@@ -42,6 +43,8 @@ const { data } = await getTopByMonth('tv_series', year, month);
       },
     ]}
   />
+  <Newsletter />
+
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>
       Las mejores series de {month}
@@ -53,10 +56,10 @@ const { data } = await getTopByMonth('tv_series', year, month);
     <p class={'description'}>
       Descubre las 50 series más populares y mejor valoradas del mes de{' '}
       {month}
-      {year} en nuestra selección mensual. Este ranking te ayudará a mantenerte
-      informado sobre las últimas tendencias y los estrenos más destacados en el
-      mundo de las series de televisión. No te pierdas ninguna novedad y
-      disfruta de las mejores series del momento.
+      {year} en nuestra selección mensual. Este ranking te ayudará a mantenerte informado
+      sobre las últimas tendencias y los estrenos más destacados en el mundo de las
+      series de televisión. No te pierdas ninguna novedad y disfruta de las mejores
+      series del momento.
     </p>
     <p class={'description'}>
       En nuestra lista de las mejores series de {month}
@@ -70,9 +73,9 @@ const { data } = await getTopByMonth('tv_series', year, month);
       Si estás buscando nuevas series para ver o quieres saber cuáles son las
       más destacadas del mes, nuestra lista de las mejores series de{' '}
       {month}
-      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre
-      las series que están dando de qué hablar. ¡No esperes más y comienza a
-      disfrutar de las mejores series del mes!
+      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre las
+      series que están dando de qué hablar. ¡No esperes más y comienza a disfrutar
+      de las mejores series del mes!
     </p>
     <List items={data} dataprop='TVSeries' />
     <footer class={'footer'}>
@@ -92,6 +95,7 @@ const { data } = await getTopByMonth('tv_series', year, month);
       }
     </footer>
   </div>
+  <Newsletter />
 </Layout>
 
 <style>

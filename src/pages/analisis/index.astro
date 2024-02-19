@@ -4,6 +4,7 @@ import ReviewList from '../../components/ReviewList.astro';
 import Pagination from '../../components/Pagination.astro';
 
 import { getReviews } from '../../data/api';
+import Newsletter from '../../components/Newsletter.astro';
 
 const page = Astro.url.searchParams.get('page')! || '';
 
@@ -30,10 +31,12 @@ const { reviews, pagination } = await getReviews(page);
         selección de análisis y descubre tus próximos favoritos.
       </p>
     </header>
+    <Newsletter />
 
     <ReviewList items={reviews} />
     <Pagination pagination={pagination} />
   </div>
+  <Newsletter />
 </Layout>
 <style>
   div {

@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import List from '../../components/List.astro';
 import Previous from '../../components/Previous.astro';
 import PreviousYears from '../../components/PreviousYears.astro';
+import Newsletter from '../../components/Newsletter.astro';
 
 import { getCurrentYear, getToday } from '../../utils';
 import { getSeries } from '../../data/api';
@@ -33,23 +34,24 @@ const { series } = await getSeries();
       },
     ]}
   />
-
+  <Newsletter />
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>Top 50 de series {year}</h1>
     <h2 class={'subtitle'}>
       Las series más populares y mejor puntuadas del mes de {year}{' '}
-       (actualizado {today})
+      (actualizado {today})
     </h2>
     <p class={'description'}>
       En TopDelMes, tenemos una lista actualizada con las series más populares y
       emocionantes de {year}. Nuestra lista de las mejores series del mes {year}
-       se actualiza diariamente para asegurarnos de que siempre estés informado
-      sobre las novedades y las series que no te puedes perder.
+      se actualiza diariamente para asegurarnos de que siempre estés informado sobre
+      las novedades y las series que no te puedes perder.
     </p>
     <List items={series} dataprop='TVSeries' />
   </div>
   <Previous type={'tv_series'} />
   <PreviousYears />
+  <Newsletter />
 </Layout>
 
 <style>

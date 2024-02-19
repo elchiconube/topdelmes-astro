@@ -6,6 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ReviewFooter from '../../components/ReviewFooter.astro';
 import YoutubeVideo from '../../components/YoutubeVideo.astro';
 import SocialHead from '../../components/SocialHead.astro';
+import Newsletter from '../../components/Newsletter.astro';
 
 import { getReview } from '../../data/api';
 import { postFormatDate } from '../../utils';
@@ -60,6 +61,7 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
       },
     ]}
   />
+
   <article class={'article'} itemscope itemtype='http://schema.org/Article'>
     <h1 itemprop='headline'>{title}</h1>
     <div class={'pre'}>
@@ -114,6 +116,8 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
     </p>
     {trailer && <YoutubeVideo url={trailer} />}
   </article>
+  <Newsletter />
+
   {
     relatedContent && (
       <ReviewFooter

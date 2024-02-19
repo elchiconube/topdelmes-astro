@@ -2,6 +2,7 @@
 import Layout from '../../../../layouts/Layout.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import List from '../../../../components/List.astro';
+import Newsletter from '../../../../components/Newsletter.astro';
 import { getAdjacentYears, isValidYear } from '../../../../utils';
 import { getTopByYear } from '../../../../data/api';
 
@@ -34,6 +35,8 @@ const { data } = await getTopByYear('tv_series', year);
       },
     ]}
   />
+  <Newsletter />
+
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>Las mejores series de {year}</h1>
     <h2 class={'subtitle'}>
@@ -56,9 +59,9 @@ const { data } = await getTopByYear('tv_series', year);
     <p class={'description'}>
       Si estás buscando nuevas series para ver o quieres saber cuáles son las
       más destacadas del año, nuestra lista de las mejores series de{' '}
-      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre
-      las series que están dando de qué hablar. ¡No esperes más y comienza a
-      disfrutar de las mejores series del año!
+      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre las
+      series que están dando de qué hablar. ¡No esperes más y comienza a disfrutar
+      de las mejores series del año!
     </p>
     <List items={data} dataprop='TVSeries' />
     <footer class={'footer'}>
@@ -78,6 +81,7 @@ const { data } = await getTopByYear('tv_series', year);
       }
     </footer>
   </div>
+  <Newsletter />
 </Layout>
 
 <style>

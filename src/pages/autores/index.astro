@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import Newsletter from '../../components/Newsletter.astro';
 
 import { getAuthors } from '../../data/api';
 
@@ -25,6 +26,7 @@ const { authors = [] } = await getAuthors();
       },
     ]}
   />
+  <Newsletter />
 
   <div class={'section'}>
     <h2 class={'subtitle'}>Nuestros expertos</h2>
@@ -50,6 +52,7 @@ const { authors = [] } = await getAuthors();
       }
     </div>
   </div>
+  <Newsletter />
 </Layout>
 
 <style>
