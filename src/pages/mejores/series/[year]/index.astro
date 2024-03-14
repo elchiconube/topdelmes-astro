@@ -18,8 +18,8 @@ const { data } = await getTopByYear('tv_series', year);
 ---
 
 <Layout
-  title={`Top ${year}: Mejores Series | TopDelMes`}
-  description={`Explora las mejores series de  ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus series favoritas y descubre nuevas!`}
+  title={`Mejores Series ${year} | TopDelMes`}
+  description={`Explora las mejores series ${year} en nuestra lista completa y actualizada. Series recomendadas ${year} ¡Encuentra tus series favoritas y descubre nuevas!`}
   canonical={`https://topdelmes.com/mejores/series/${year}`}
 >
   <Breadcrumb
@@ -38,7 +38,7 @@ const { data } = await getTopByYear('tv_series', year);
   <Newsletter />
 
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
-    <h1 class={'title'}>Las mejores series de {year}</h1>
+    <h1 class={'title'}>Descubre las mejores series de {year}</h1>
     <h2 class={'subtitle'}>
       Las series mejor puntuadas durante el {year}
     </h2>
@@ -49,34 +49,31 @@ const { data } = await getTopByYear('tv_series', year);
       {year}.
     </p>
     <p class={'description'}>
-      En nuestra lista de las mejores series de {year}, encontrarás una amplia
-      variedad de géneros y temáticas, desde dramas intensos hasta comedias
-      ligeras, pasando por intrigantes series de ciencia ficción y apasionantes
-      thrillers. Nuestro ranking se basa en las valoraciones y opiniones de los
-      espectadores, lo que garantiza que solo encontrarás las series más
-      populares y de mayor calidad.
+      En nuestra lista de <strong>las mejores series de {year}</strong>,
+      encontrarás una amplia variedad de géneros y temáticas, desde dramas
+      intensos hasta comedias ligeras, pasando por intrigantes series de ciencia
+      ficción y apasionantes thrillers. Nuestro ranking se basa en las
+      valoraciones y opiniones de los espectadores, lo que garantiza que solo
+      encontrarás las series más populares y de mayor calidad.
     </p>
     <p class={'description'}>
       Si estás buscando nuevas series para ver o quieres saber cuáles son las
-      más destacadas del año, nuestra lista de las mejores series de{' '}
-      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre las
-      series que están dando de qué hablar. ¡No esperes más y comienza a disfrutar
-      de las mejores series del año!
+      más destacadas del año, nuestra lista de <strong
+        >las mejores series de{' '}
+        {year}</strong
+      > es el recurso perfecto para ti. Explora nuestro ranking y descubre las series
+      más interesantes. ¡No te pierdas las mejores series de {year}!
     </p>
     <List items={data} dataprop='TVSeries' />
     <footer class={'footer'}>
       {
         prev && (
-          <a href={`/mejores/series/${prev}`}>
-            Ver mejores series estrenadas en {prev}
-          </a>
+          <a href={`/mejores/series/${prev}`}>Ver mejores series en {prev}</a>
         )
       }
       {
         next && (
-          <a href={`/mejores/series/${next}`}>
-            Ver mejores series estrenadas en {next}
-          </a>
+          <a href={`/mejores/series/${next}`}>Ver mejores series en {next}</a>
         )
       }
     </footer>

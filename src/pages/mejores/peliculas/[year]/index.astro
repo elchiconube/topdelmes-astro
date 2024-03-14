@@ -18,8 +18,8 @@ const { data } = await getTopByYear('movie', year);
 ---
 
 <Layout
-  title={`Top ${year}: Mejores Películas | TopDelMes`}
-  description={`Explora las mejores películas de  ${year} en nuestra lista completa y actualizada en TopDelMes.com. ¡Encuentra tus películas favoritas y descubre nuevas!`}
+  title={`Mejores Películas ${year} | TopDelMes`}
+  description={`Explora las mejores películas ${year} en nuestra lista completa y actualizada. Películas recomendadas ${year} ¡Encuentra tus películas favoritas y descubre nuevas!`}
   canonical={`https://topdelmes.com/mejores/peliculas/${year}`}
 >
   <Breadcrumb
@@ -43,39 +43,38 @@ const { data } = await getTopByYear('movie', year);
       Las películas mejor puntuadas durante el {year}
     </h2>
     <p class={'description'}>
-      Descubre las 50 películas más populares y mejor valoradas y estrenadas en{
-        ' '
-      }
-      {year}.
+      Descubre las 50 mejores películas de {year} ordenadas por su valoración.
     </p>
     <p class={'description'}>
-      En nuestra lista de las mejores películas de {year}, encontrarás una
-      amplia variedad de géneros y temáticas, desde dramas intensos hasta
-      comedias ligeras, pasando por intrigantes películas de ciencia ficción y
-      apasionantes thrillers. Nuestro ranking se basa en las valoraciones y
-      opiniones de los espectadores, lo que garantiza que solo encontrarás las
-      películas más populares y de mayor calidad.
+      En nuestra lista de <strong>las mejores películas de {year}</strong>,
+      encontrarás una amplia variedad de géneros y temáticas, desde dramas
+      intensos hasta comedias ligeras, pasando por intrigantes películas de
+      ciencia ficción y apasionantes thrillers. Nuestro ranking se basa en las
+      valoraciones y opiniones de los espectadores, lo que garantiza que solo
+      encontrarás las películas más populares y de mayor calidad.
     </p>
     <p class={'description'}>
       Si estás buscando nuevas películas para ver o quieres saber cuáles son las
-      más destacadas del año, nuestra lista de las mejores películas de{' '}
-      {year} es el recurso perfecto para ti. Explora nuestro ranking y descubre las
-      películas que están dando de qué hablar. ¡No esperes más y comienza a disfrutar
-      de las mejores películas del año!
+      más destacadas del año, nuestra lista de <strong
+        >las mejores películas de{' '}
+        {year}</strong
+      > es el recurso perfecto para ti. Explora nuestro ranking y descubre las películas
+      que están dando de qué hablar. ¡No esperes más y comienza a disfrutar de las
+      mejores películas del año!
     </p>
     <List items={data} dataprop='Movie' />
     <footer class={'footer'}>
       {
         prev && (
           <a href={`/mejores/peliculas/${prev}`}>
-            Ver mejores películas estrenadas en {prev}
+            Ver mejores películas en {prev}
           </a>
         )
       }
       {
         next && (
           <a href={`/mejores/peliculas/${next}`}>
-            Ver mejores películas estrenadas en {next}
+            Ver mejores películas en {next}
           </a>
         )
       }
