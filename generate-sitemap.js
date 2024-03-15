@@ -57,11 +57,21 @@ for (let year = 1920; year <= currentYear; year++) {
       changefreq: 'monthly',
     });
   }
-}
+}  
 
 async function fetchPostsAndGenerateSitemap() {
   try {
-    const { data: { data: posts } } = await axios.get(`${process.env.STRAPI_URL}/reviews`, axiosConfig);
+    const { data } = await axios.get(`${process.env.STRAPI_URL}/reviews`, axiosConfig);
+
+
+    const allPages = data.meta.pagination.pageCount
+
+    let posts = []
+
+    for (let i = 2; i <= allPages; i++) {
+      const { data: { data: pagePosts } } = await axios.get(`${process.env.STRAPI_URL}/reviews?pagination[page]=${i}`, axiosConfig);
+      posts = posts.concat(pagePosts)
+    }
 
     for (const post of posts) {
       const slug = post.attributes.slug;
