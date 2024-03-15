@@ -102,7 +102,7 @@ export async function getHomeData() {
     const moviesYear = processData(contentsYear, 'movie');
     const seriesMonth = processData(contentsMonth, 'tv_series');
     const moviesMonth = processData(contentsMonth, 'movie');
-    const reviews = reviewsResponse.data.data.slice(0, 10);
+    const reviews = reviewsResponse.data.data.slice(0, 25);
 
     return {
        seriesYear, moviesYear, seriesMonth, moviesMonth, reviews ,
