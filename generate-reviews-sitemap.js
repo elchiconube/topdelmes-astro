@@ -9,9 +9,18 @@ const axiosConfig = {
   },
 };
 
+function getDateTime48HoursAgo() {
+  const now = new Date();
+  const hours48Ago = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+  return hours48Ago.toISOString();
+}  
+
 async function fetchAllReviews() {
+
+  const hours48Ago = getDateTime48HoursAgo();
+  
   try {
-    const { data: { data: reviews } } = await axios.get(`${process.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate[0]=author&pagination[limit]=100`, axiosConfig);
+    const { data: { data: reviews } } = await axios.get(`${process.env.STRAPI_URL}/reviews?sort=createdAt:desc&filters[publishedAt][$gte]=${hours48Ago}`, axiosConfig);
     return reviews;
   } catch (error) {
     console.error('Error fetching reviews:', error);
