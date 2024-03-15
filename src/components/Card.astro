@@ -75,10 +75,6 @@ const { updatedAt } = item;
         </div>
       )
     }
-
-    <div class={'center'}>
-      <p>Actualizado: {getToday(updatedAt)}</p>
-    </div>
     {
       reviews?.data?.length > 0
         ? reviews.data.map((review) => (

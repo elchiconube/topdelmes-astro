@@ -69,4 +69,20 @@ const { reviews, pagination } = await getReviews(page);
     padding: 32px;
     position: relative;
   }
+
+  @media (max-width: 768px) {
+    div {
+      padding: 16px;
+    }
+
+    .title {
+      font-size: var(--fs-4);
+      margin-bottom: 16px;
+    }
+
+    .description {
+      max-width: 100%;
+      padding: 16px 0;
+    }
+  }
 </style>
