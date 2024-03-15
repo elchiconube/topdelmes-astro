@@ -19,6 +19,14 @@ async function fetchAllReviews() {
   }
 }
 
+function escapeXML(str) {
+  return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+}
+
 function generateSitemapXML(reviews) {
   let xmlSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -37,7 +45,7 @@ function generateSitemapXML(reviews) {
         <news:language>es</news:language>
       </news:publication>
       <news:publication_date>${publicationDate}</news:publication_date>
-      <news:title>${attributes.title}</news:title>
+      <news:title>${escapeXML(attributes.title)}</news:title>
     </news:news>
   </url>`;
   });
