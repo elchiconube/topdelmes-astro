@@ -6,7 +6,6 @@ import ReviewList from '../components/ReviewList.astro';
 import PreviousYears from '../components/PreviousYears.astro';
 import Previous from '../components/Previous.astro';
 import TimeMachine from '../components/TimeMachine.astro';
-import Newsletter from '../components/Newsletter.astro';
 
 import { getFullYear, getCurrentMonthName } from '../utils';
 
@@ -22,7 +21,6 @@ const { seriesYear, moviesYear, reviews, seriesMonth, moviesMonth } = data;
 
 <Layout>
   <Hero />
-  <Newsletter />
   <section class={'section'}>
     <header>
       <p class={'subtitle'}>Top 10 series de {year}</p>
@@ -148,7 +146,6 @@ const { seriesYear, moviesYear, reviews, seriesMonth, moviesMonth } = data;
   <PreviousYears />
   <Previous />
   <TimeMachine />
-  <Newsletter />
 </Layout>
 
 <style>

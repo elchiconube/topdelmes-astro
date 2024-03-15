@@ -5,7 +5,6 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import List from '../../components/List.astro';
 import Previous from '../../components/Previous.astro';
 import PreviousYears from '../../components/PreviousYears.astro';
-import Newsletter from '../../components/Newsletter.astro';
 
 import { getCurrentYear, getToday } from '../../utils';
 import { getSeries } from '../../data/api';
@@ -34,7 +33,6 @@ const { series } = await getSeries();
       },
     ]}
   />
-  <Newsletter />
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>Las mejores series {year}</h1>
     <h2 class={'subtitle'}>
@@ -51,7 +49,6 @@ const { series } = await getSeries();
   </div>
   <Previous type={'tv_series'} />
   <PreviousYears />
-  <Newsletter />
 </Layout>
 
 <style>

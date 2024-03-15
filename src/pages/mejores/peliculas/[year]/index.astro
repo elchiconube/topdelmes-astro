@@ -2,7 +2,6 @@
 import Layout from '../../../../layouts/Layout.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import List from '../../../../components/List.astro';
-import Newsletter from '../../../../components/Newsletter.astro';
 import { getAdjacentYears, isValidYear } from '../../../../utils';
 import { getTopByYear } from '../../../../data/api';
 
@@ -35,7 +34,6 @@ const { data } = await getTopByYear('movie', year);
       },
     ]}
   />
-  <Newsletter />
 
   <div class={'section'} itemscope itemtype='http://schema.org/ItemList'>
     <h1 class={'title'}>Las mejores películas de {year}</h1>
@@ -80,7 +78,6 @@ const { data } = await getTopByYear('movie', year);
       }
     </footer>
   </div>
-  <Newsletter />
 </Layout>
 
 <style>

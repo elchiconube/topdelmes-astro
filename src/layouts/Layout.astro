@@ -13,8 +13,8 @@ const year = getFullYear();
 const month = getCurrentMonthName();
 
 const {
-  title = `Top 10 Mejores Series y Películas ${month} ${year} - Actualizado Mensualmente | TopDelMes`,
-  description = `Descubre nuestra selección actualizada de las 10 mejores series y películas de ${month} ${year}.`,
+  title = `Las Mejores Series y Las Mejores Películas ${year} - Actualizado en ${month} | TopDelMes`,
+  description = `Descubre nuestra selección actualizada de las 10 mejores series y películas de ${month} ${year}. No te pierdas nuestras series recomendadas`,
   canonical = 'https://topdelmes.com',
 } = Astro.props;
 ---
@@ -65,6 +65,41 @@ const {
 
     <slot name='social' />
     <script src='https://unpkg.com/@phosphor-icons/web' defer></script>
+
+    <script type='application/ld+json'>
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsMediaOrganization",
+        "name": "TopDelMes",
+        "foundingDate": "2023",
+        "missionCoveragePrioritiesPolicy": "https://www.topdelmes.com/como-trabajamos#mision",
+        "ethicsPolicy": "https://www.topdelmes.com/como-trabajamos#codigo-conducta",
+        "verificationFactCheckingPolicy": "https://www.topdelmes.com/como-trabajamos#verificacion",
+        "unnamedSourcesPolicy": "https://www.topdelmes.com/como-trabajamos#fuentes-anonimas",
+        "correctionsPolicy": "https://www.topdelmes.com/como-trabajamos#correciones",
+        "noBylinesPolicy": "https://www.topdelmes.com/como-trabajamos#firmas",
+        "actionableFeedbackPolicy": "https://www.topdelmes.com/como-trabajamos#lectores",
+        "diversityPolicy": "https://www.topdelmes.com/como-trabajamos#diversidad",
+        "diversityStaffingReport": "https://www.topdelmes.com/como-trabajamos#diversidad",
+        "masthead": "https://www.topdelmes.com/como-trabajamos#estructura",
+        "ownershipFundingInfo": "https://www.topdelmes.com/como-trabajamos#codigo-conducta",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "contact",
+          "email": "info@topdelmes.com"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "telephone": "649131791",
+          "email": "info@topdelmes.com",
+          "addressLocality": "Leon",
+          "postalCode": "24460",
+          "streetAddress": "Principe de Asturias 6",
+          "url": "https://www.topdelmes.com/",
+          "sameAs": ["https://twitter.com/topdelmes_"]
+        }
+      }
+    </script>
   </head>
   <body>
     <div class='layout'>

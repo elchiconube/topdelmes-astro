@@ -6,7 +6,6 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ReviewFooter from '../../components/ReviewFooter.astro';
 import YoutubeVideo from '../../components/YoutubeVideo.astro';
 import SocialHead from '../../components/SocialHead.astro';
-import Newsletter from '../../components/Newsletter.astro';
 
 import { getReview } from '../../data/api';
 import { postFormatDate } from '../../utils';
@@ -94,17 +93,24 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
       </time>
       <meta datetime={updatedAt} itemprop='dateModified' />
     </div>
-    <figure class={'figure'}>
-      <img
-        itemprop='image'
-        src={image || '/images/popcorn.webp'}
-        width={862}
-        height={465}
-        alt={`Análisis ${title}`}
-      />
-    </figure>
+    {
+      image ? (
+        <figure class={'figure'}>
+          <img
+            itemprop='image'
+            src={image || '/images/popcorn.webp'}
+            width={862}
+            height={465}
+            alt={`Análisis ${title}`}
+          />
+        </figure>
+      ) : null
+    }
+
     <div class={'data'}>
-      <p>Nota: {rate || 6}/10</p>
+      <!-- <Rating rating={rate} /> -->
+      <h3>Nota</h3>
+      <p><strong>{rate || 6}</strong><small>/10</small></p>
     </div>
 
     <div itemprop='articleBody' class='body' set:html={marked.parse(body)} />
@@ -116,7 +122,6 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
     </p>
     {trailer && <YoutubeVideo url={trailer} />}
   </article>
-  <Newsletter />
 
   {
     relatedContent && (
@@ -189,17 +194,31 @@ const breadCrumbTitle = relatedContent ? relatedContent.title : title;
   }
 
   .data {
-    max-width: 700px;
-    padding: 0 16px;
-    margin: 0 auto 18px;
-    color: var(--citrine);
-    font-size: var(--fs-9);
-  }
+    text-align: center;
+    position: relative;
+    display: block;
+    margin: 18px auto;
+    width: 120px;
+    line-height: 1;
+    h3 {
+      margin: 0;
+      font-weight: normal;
+    }
+    p {
+      color: var(--citrine);
+      strong {
+        font-size: 60px;
+      }
 
-  .data > p {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+      small {
+        font-size: 15px;
+        color: white;
+        position: absolute;
+        bottom: 0px;
+        right: 14px;
+        letter-spacing: 2px;
+      }
+    }
   }
 
   .body h2 {

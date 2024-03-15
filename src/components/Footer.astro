@@ -1,36 +1,52 @@
 ---
 import { getFullYear } from '../utils.js';
+import Newsletter from './Newsletter.astro';
 
 const year = getFullYear();
 ---
 
+<Newsletter />
 <footer class='footer'>
+  <div class='pre'>
+    <a class='logo' href='/'
+      ><img
+        alt='Logo Topdelmes'
+        width='120'
+        height='120'
+        src='/images/logo.svg'
+      /></a
+    >
+  </div>
   <div class='container'>
     <div>
-      <h4 class='heading'>Navegación</h4>
       <ul class='list'>
-        <li><a class='link' href='/'>Inicio</a></li>
-        <li><a class='link' href='/series'>Series</a></li>
-        <li><a class='link' href='/peliculas'>Películas</a></li>
-        <li><a class='link' href='/analisis'>Análisis</a></li>
-        <li><a class='link' href='/autores'>Autores</a></li>
+        <li><a class='link' href='/'>Inicio</a></li> /
+        <li><a class='link' href='/series'>Series</a></li> /
+        <li><a class='link' href='/peliculas'>Películas</a></li> /
+        <li><a class='link' href='/analisis'>Análisis</a></li> /
+        <li><a class='link' href='/autores'>Autores</a></li> /
+        <li><a class='link' href='/como-trabajamos'>Cómo trabajamos</a></li>
       </ul>
     </div>
   </div>
-  <div class='copyright'>© {year} topdelmes.com</div>
+  <div class='copyright'>
+    Hecho con cariño en 2023 - © {year} TopDelMes
+  </div>
 </footer>
 
 <style>
   .footer {
     background: var(--raisin-black);
     color: var(--white);
-    padding: 32px 0 0;
+  }
+
+  .pre {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
   }
 
   .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 32px;
@@ -42,9 +58,13 @@ const year = getFullYear();
   }
 
   .list {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
   }
 
   .link {
