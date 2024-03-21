@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "node dist/server/entry.mjs",
     "build": "astro build && npm run build:sitemap && npm run build:news",
+    "build:sitemaps": "npm run build:sitemap && npm run build:news",
     "build:sitemap": "node generate-sitemap.js",
     "build:news": "node generate-reviews-sitemap.js",
     "preview": "astro preview",
