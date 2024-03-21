@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "start": "node dist/server/entry.mjs",
+    "start": "node cron.js & node dist/server/entry.mjs",
     "build": "astro build && npm run build:sitemap && npm run build:news",
     "build:sitemaps": "npm run build:sitemap && npm run build:news",
     "build:sitemap": "node generate-sitemap.js",
@@ -21,6 +21,7 @@
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "marked": "^11.1.0",
+    "node-cron": "^3.0.3",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "remove-markdown": "^0.5.0",
