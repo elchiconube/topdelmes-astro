@@ -1,7 +1,7 @@
 import { getCurrentMonth, getCurrentYear, axiosConfig, getMonthNumber } from '../utils'
 import axios from 'axios';
 
-export async function getTopByMonth(type = "tv_series", year, month){
+export async function getTopByMonth(type = "tv_series", year, month) {
   try {
 
     const monthNumber = getMonthNumber(month);
@@ -15,12 +15,12 @@ export async function getTopByMonth(type = "tv_series", year, month){
 
     const data = contents.filter((i) => i.attributes.type === type);
 
-    return { data, year, month } ;
+    return { data, year, month };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  data: [], year, month } ;
+    return { data: [], year, month };
   }
-} 
+}
 
 export async function getTopByYear(type = "tv_series", year) {
 
@@ -35,10 +35,10 @@ export async function getTopByYear(type = "tv_series", year) {
 
     const data = contents.filter((i) => i.attributes.type === type);
 
-    return {  data, year } ;
+    return { data, year };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  data: [], year } ;
+    return { data: [], year };
   }
 }
 
@@ -51,10 +51,10 @@ export async function getAuthor(slug) {
 
     const author = response.data.data[0];
 
-    return {  author } ;
+    return { author };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  author: null } ;
+    return { author: null };
   }
 }
 
@@ -67,10 +67,10 @@ export async function getAuthors() {
 
     const authors = response.data.data;
 
-    return { authors  };
+    return { authors };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return { authors: []  };
+    return { authors: [] };
   }
 }
 
@@ -80,19 +80,30 @@ export async function getHomeData() {
 
   const buildApiUrl = (type, year, month) => {
     const baseUrl = `${import.meta.env.STRAPI_URL}/tops`;
-    const monthFilter = month ? `&filters[month][$eq][1]=${month}` : '&filters[$and][1][month][$null]=null';
-    return `${baseUrl}?filters[${type}][$eq][0]=${year}${monthFilter}&populate=*`;
+    let filters = '';
+
+    if (type === 'year') {
+      filters = `?filters[$and][0][year][$eq]=${year}`;
+    } else if (type === 'month') {
+      filters = `?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$eq]=${month}`;
+    }
+
+    return `${baseUrl}${filters}&populate=*`;
   };
 
   const processData = (data, type) => data
     .filter((item) => item.attributes?.type === type)
     .slice(0, 10);
 
+  const monthUrl = buildApiUrl('month', year, month);
+  const yearUrl = buildApiUrl('year', year);
+  const reviewsUrl = `${import.meta.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate=*`;
+
   try {
     const [yearResponse, monthResponse, reviewsResponse] = await Promise.all([
-      axios.get(buildApiUrl('year', year), axiosConfig),
-      axios.get(buildApiUrl('month', year, month), axiosConfig),
-      axios.get(`${import.meta.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate=*`, axiosConfig),
+      axios.get(yearUrl, axiosConfig),
+      axios.get(monthUrl, axiosConfig),
+      axios.get(reviewsUrl, axiosConfig),
     ]);
 
     const contentsYear = yearResponse.data.data[0].attributes?.contents.data;
@@ -105,11 +116,11 @@ export async function getHomeData() {
     const reviews = reviewsResponse.data.data.slice(0, 25);
 
     return {
-       seriesYear, moviesYear, seriesMonth, moviesMonth, reviews ,
+      seriesYear, moviesYear, seriesMonth, moviesMonth, reviews,
     };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  series: [], movies: [], reviews: [] } ;
+    return { series: [], movies: [], reviews: [] };
   }
 }
 
@@ -125,10 +136,10 @@ export async function getSeries() {
 
     const series = contents.filter((i) => i.attributes.type === "tv_series");
 
-    return{ series } ;
+    return { series };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return{ series: [] } ;
+    return { series: [] };
   }
 }
 
@@ -148,7 +159,7 @@ export async function getMovies() {
     return { movies };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return { movies: []  };
+    return { movies: [] };
   }
 }
 
@@ -165,12 +176,12 @@ export async function getReviews(page) {
     const pagination = response.data.meta.pagination || null;
 
     return {
-        reviews,
-        pagination
+      reviews,
+      pagination
     };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  reviews: [], pagination: null } ;
+    return { reviews: [], pagination: null };
   }
 }
 
@@ -185,9 +196,9 @@ export async function getReview(slug) {
 
     const review = response.data.data[0];
 
-    return {  review  };
+    return { review };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return {  review: null  };
+    return { review: null };
   }
 }
