@@ -78,41 +78,48 @@ export async function getHomeData() {
   const month = getCurrentMonth();
   const year = getCurrentYear();
 
-  const buildApiUrl = (type, year, month) => {
-    const baseUrl = `${import.meta.env.STRAPI_URL}/tops`;
-    let filters = '';
+  const getTopByMonth = async (type, year, month) => {
+    try {
+      const monthNumber = getMonthNumber(month);
+      const response = await axios.get(
+        `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$eq]=${monthNumber}&populate=*`,
+        axiosConfig
+      );
 
-    if (type === 'year') {
-      filters = `?filters[$and][0][year][$eq]=${year}`;
-    } else if (type === 'month') {
-      filters = `?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$eq]=${month}`;
+      const contents = response.data.data[0]?.attributes.contents.data || [];
+      return contents.filter((i) => i.attributes.type === type);
+    } catch (error) {
+      console.error("Error al obtener los datos por mes:", error);
+      return [];
     }
-
-    return `${baseUrl}${filters}&populate=*`;
   };
 
-  const processData = (data, type) => data
-    .filter((item) => item.attributes?.type === type)
-    .slice(0, 10);
+  const getTopByYear = async (type, year) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$null]=null&populate=*`,
+        axiosConfig
+      );
 
-  const monthUrl = buildApiUrl('month', year, month);
-  const yearUrl = buildApiUrl('year', year);
+      const contents = response.data.data[0]?.attributes.contents.data || [];
+      return contents.filter((i) => i.attributes.type === type);
+    } catch (error) {
+      console.error("Error al obtener los datos por año:", error);
+      return [];
+    }
+  };
+
   const reviewsUrl = `${import.meta.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate=*`;
 
   try {
-    const [yearResponse, monthResponse, reviewsResponse] = await Promise.all([
-      axios.get(yearUrl, axiosConfig),
-      axios.get(monthUrl, axiosConfig),
-      axios.get(reviewsUrl, axiosConfig),
+    const [seriesYear, moviesYear, seriesMonth, moviesMonth, reviewsResponse] = await Promise.all([
+      getTopByYear('tv_series', year),
+      getTopByYear('movie', year),
+      getTopByMonth('tv_series', year, month),
+      getTopByMonth('movie', year, month),
+      axios.get(reviewsUrl, axiosConfig)
     ]);
 
-    const contentsYear = yearResponse.data.data[0].attributes?.contents.data;
-    const contentsMonth = monthResponse.data.data[0].attributes?.contents.data;
-
-    const seriesYear = processData(contentsYear, 'tv_series');
-    const moviesYear = processData(contentsYear, 'movie');
-    const seriesMonth = processData(contentsMonth, 'tv_series');
-    const moviesMonth = processData(contentsMonth, 'movie');
     const reviews = reviewsResponse.data.data.slice(0, 25);
 
     return {
@@ -120,7 +127,7 @@ export async function getHomeData() {
     };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return { series: [], movies: [], reviews: [] };
+    return { seriesYear: [], moviesYear: [], seriesMonth: [], moviesMonth: [], reviews: [] };
   }
 }
 
