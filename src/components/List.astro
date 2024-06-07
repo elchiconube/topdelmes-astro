@@ -9,19 +9,21 @@ const getDirector = (item) =>
 
 <ul class={'container'} itemscope itemtype='http://schema.org/ItemList'>
   {
-    items.map((item, position) => (
-      <li
-        itemprop='itemListElement'
-        itemscope
-        itemtype={`http://schema.org/${dataprop}`}
-      >
-        <meta itemprop='position' content={position + 1} />
-        {getDirector(item) && (
-          <meta itemprop='director' content={getDirector(item)} />
-        )}
-        <Card ranking={position + 1} item={item} />
-      </li>
-    ))
+    items?.length
+      ? items.map((item, position) => (
+          <li
+            itemprop='itemListElement'
+            itemscope
+            itemtype={`http://schema.org/${dataprop}`}
+          >
+            <meta itemprop='position' content={position + 1} />
+            {getDirector(item) && (
+              <meta itemprop='director' content={getDirector(item)} />
+            )}
+            <Card ranking={position + 1} item={item} />
+          </li>
+        ))
+      : null
   }
 </ul>
 

@@ -75,50 +75,30 @@ export async function getAuthors() {
 }
 
 export async function getHomeData() {
-  const month = getCurrentMonth();
-  const year = getCurrentYear();
+  const currentMonth = getCurrentMonth();
+  const currentYear = getCurrentYear();
 
-  const getTopByMonth = async (type, year, month) => {
-    try {
-      const monthNumber = getMonthNumber(month);
-      const response = await axios.get(
-        `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$eq]=${monthNumber}&populate=*`,
-        axiosConfig
-      );
+  const yearUrl = `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${currentYear}&filters[$and][1][month][$null]=null&populate=*`
+  const monthUrl = `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${currentYear}&filters[$and][1][month][$eq]=${currentMonth}&populate=*`
 
-      const contents = response.data.data[0]?.attributes.contents.data || [];
-      return contents.filter((i) => i.attributes.type === type);
-    } catch (error) {
-      console.error("Error al obtener los datos por mes:", error);
-      return [];
-    }
-  };
-
-  const getTopByYear = async (type, year) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.STRAPI_URL}/tops?filters[$and][0][year][$eq]=${year}&filters[$and][1][month][$null]=null&populate=*`,
-        axiosConfig
-      );
-
-      const contents = response.data.data[0]?.attributes.contents.data || [];
-      return contents.filter((i) => i.attributes.type === type);
-    } catch (error) {
-      console.error("Error al obtener los datos por año:", error);
-      return [];
-    }
-  };
-
-  const reviewsUrl = `${import.meta.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate=*`;
+  const processData = (data, type) => data
+    .filter((item) => item.attributes?.type === type)
+    .slice(0, 10);
 
   try {
-    const [seriesYear, moviesYear, seriesMonth, moviesMonth, reviewsResponse] = await Promise.all([
-      getTopByYear('tv_series', year),
-      getTopByYear('movie', year),
-      getTopByMonth('tv_series', year, month),
-      getTopByMonth('movie', year, month),
-      axios.get(reviewsUrl, axiosConfig)
+    const [yearResponse, monthResponse, reviewsResponse] = await Promise.all([
+      axios.get(yearUrl, axiosConfig),
+      axios.get(monthUrl, axiosConfig),
+      axios.get(`${import.meta.env.STRAPI_URL}/reviews?sort=createdAt:desc&populate=*`, axiosConfig),
     ]);
+
+    const contentsYear = yearResponse.data.data[0].attributes?.contents.data;
+    const contentsMonth = monthResponse.data.data[0].attributes?.contents.data;
+
+    const seriesYear = processData(contentsYear, 'tv_series');
+    const moviesYear = processData(contentsYear, 'movie');
+    const seriesMonth = processData(contentsMonth, 'tv_series');
+    const moviesMonth = processData(contentsMonth, 'movie');
 
     const reviews = reviewsResponse.data.data.slice(0, 25);
 
@@ -127,7 +107,7 @@ export async function getHomeData() {
     };
   } catch (error) {
     console.error("Error al obtener los datos:", error);
-    return { seriesYear: [], moviesYear: [], seriesMonth: [], moviesMonth: [], reviews: [] };
+    return { series: [], movies: [], reviews: [] };
   }
 }
 
